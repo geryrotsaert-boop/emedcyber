@@ -11,6 +11,5 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html')
       }
     }
-  },
-  publicDir: 'public', // Dossier pour les fichiers statiques
+  }
 })
