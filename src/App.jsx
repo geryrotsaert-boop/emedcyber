@@ -14,31 +14,37 @@ const App = () => {
 
   const tips = [
     {
+      id: 1,
       title: "Mots de passe forts",
       description: "Utilisez des mots de passe complexes avec au moins 12 caractères, mélangeant lettres, chiffres et symboles.",
       icon: "🔒"
     },
     {
+      id: 2,
       title: "Authentification à deux facteurs",
       description: "Activez la 2FA sur tous vos comptes importants pour une sécurité renforcée.",
       icon: "📱"
     },
     {
+      id: 3,
       title: "Mises à jour régulières",
       description: "Gardez vos systèmes et logiciels à jour pour corriger les vulnérabilités de sécurité.",
       icon: "🔄"
     },
     {
+      id: 4,
       title: "Sauvegardes fréquentes",
       description: "Effectuez régulièrement des sauvegardes de vos données importantes sur des supports externes.",
       icon: "💾"
     },
     {
+      id: 5,
       title: "Vigilance contre le phishing",
       description: "Ne cliquez jamais sur des liens suspects et vérifiez toujours l'expéditeur des emails.",
       icon: "🎣"
     },
     {
+      id: 6,
       title: "Réseaux sécurisés",
       description: "Évitez les réseaux Wi-Fi publics pour les transactions sensibles ou utilisez un VPN.",
       icon: "📡"
@@ -47,38 +53,51 @@ const App = () => {
 
   const threats = [
     {
+      id: 1,
       name: "Phishing",
       severity: "Élevée",
       description: "Technique de fraude par l'envoi de messages électroniques visant à obtenir des informations confidentielles."
     },
     {
+      id: 2,
       name: "Ransomware",
       severity: "Critique",
       description: "Logiciel malveillant qui chiffre les données de la victime et demande une rançon pour les déchiffrer."
     },
     {
+      id: 3,
       name: "Malware",
       severity: "Moyenne",
       description: "Logiciel conçu pour perturber, endommager ou accéder sans autorisation à un système informatique."
     },
     {
+      id: 4,
       name: "Attaques DDoS",
       severity: "Élevée",
       description: "Attaque par déni de service distribué visant à rendre un service indisponible en le submergeant de trafic."
     },
     {
+      id: 5,
       name: "Ingénierie sociale",
       severity: "Élevée",
       description: "Manipulation psychologique pour inciter les utilisateurs à divulguer des informations confidentielles."
     }
   ];
 
+  const handleSmoothScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFact((prev) => (prev + 1) % securityFacts.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [securityFacts.length]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -93,16 +112,26 @@ const App = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#accueil" className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Accueil</a>
-                <a href="#menaces" className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Menaces</a>
-                <a href="#conseils" className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Conseils</a>
-                <a href="#ressources" className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Ressources</a>
+                <button onClick={() => handleSmoothScroll('accueil')} className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  Accueil
+                </button>
+                <button onClick={() => handleSmoothScroll('menaces')} className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  Menaces
+                </button>
+                <button onClick={() => handleSmoothScroll('conseils')} className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  Conseils
+                </button>
+                <button onClick={() => handleSmoothScroll('ressources')} className="text-white hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  Ressources
+                </button>
               </div>
             </div>
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-white hover:text-purple-400 focus:outline-none"
+                aria-label="Menu de navigation"
+                aria-expanded={isMenuOpen}
               >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {isMenuOpen ? (
@@ -118,10 +147,18 @@ const App = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800/90">
-              <a href="#accueil" className="text-white block px-3 py-2 rounded-md text-base font-medium">Accueil</a>
-              <a href="#menaces" className="text-white block px-3 py-2 rounded-md text-base font-medium">Menaces</a>
-              <a href="#conseils" className="text-white block px-3 py-2 rounded-md text-base font-medium">Conseils</a>
-              <a href="#ressources" className="text-white block px-3 py-2 rounded-md text-base font-medium">Ressources</a>
+              <button onClick={() => handleSmoothScroll('accueil')} className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+                Accueil
+              </button>
+              <button onClick={() => handleSmoothScroll('menaces')} className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+                Menaces
+              </button>
+              <button onClick={() => handleSmoothScroll('conseils')} className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+                Conseils
+              </button>
+              <button onClick={() => handleSmoothScroll('ressources')} className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+                Ressources
+              </button>
             </div>
           </div>
         )}
@@ -142,7 +179,7 @@ const App = () => {
               <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                 Commencer la protection
               </button>
-              <button className="bg-transparent border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-3 px-8 rounded-lg transition-all duration-300">
+              <button onClick={() => handleSmoothScroll('conseils')} className="bg-transparent border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-bold py-3 px-8 rounded-lg transition-all duration-300">
                 En savoir plus
               </button>
             </div>
@@ -184,9 +221,9 @@ const App = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {threats.map((threat, index) => (
+            {threats.map((threat) => (
               <div
-                key={index}
+                key={threat.id}
                 className="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
               >
                 <div className="flex items-center mb-4">
@@ -220,9 +257,9 @@ const App = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tips.map((tip, index) => (
+            {tips.map((tip) => (
               <div
-                key={index}
+                key={tip.id}
                 className="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-purple-500/20 hover:border-purple-400/50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
               >
                 <div className="text-4xl mb-4">{tip.icon}</div>
@@ -249,12 +286,12 @@ const App = () => {
               <h3 className="text-2xl font-bold text-white mb-6">Outils Recommandés</h3>
               <div className="space-y-4">
                 {[
-                  { name: "Gestionnaire de mots de passe", desc: "LastPass, 1Password, Bitwarden" },
-                  { name: "Antivirus", desc: "Bitdefender, Norton, Kaspersky" },
-                  { name: "VPN", desc: "ExpressVPN, NordVPN, ProtonVPN" },
-                  { name: "Authentification 2FA", desc: "Google Authenticator, Authy, Microsoft Authenticator" }
-                ].map((tool, index) => (
-                  <div key={index} className="border-b border-gray-700 pb-4 last:border-b-0">
+                  { id: 1, name: "Gestionnaire de mots de passe", desc: "LastPass, 1Password, Bitwarden" },
+                  { id: 2, name: "Antivirus", desc: "Bitdefender, Norton, Kaspersky" },
+                  { id: 3, name: "VPN", desc: "ExpressVPN, NordVPN, ProtonVPN" },
+                  { id: 4, name: "Authentification 2FA", desc: "Google Authenticator, Authy, Microsoft Authenticator" }
+                ].map((tool) => (
+                  <div key={tool.id} className="border-b border-gray-700 pb-4 last:border-b-0">
                     <h4 className="text-lg font-semibold text-purple-400">{tool.name}</h4>
                     <p className="text-gray-300">{tool.desc}</p>
                   </div>
@@ -266,12 +303,12 @@ const App = () => {
               <h3 className="text-2xl font-bold text-white mb-6">Formations & Certifications</h3>
               <div className="space-y-4">
                 {[
-                  { name: "Certifications", desc: "CISSP, CEH, CompTIA Security+" },
-                  { name: "Plateformes d'apprentissage", desc: "Coursera, Udemy, Cybrary" },
-                  { name: "Communautés", desc: "OWASP, ISC², SANS Institute" },
-                  { name: "Veille sécurité", desc: "Krebs on Security, The Hacker News, Dark Reading" }
-                ].map((resource, index) => (
-                  <div key={index} className="border-b border-gray-700 pb-4 last:border-b-0">
+                  { id: 1, name: "Certifications", desc: "CISSP, CEH, CompTIA Security+" },
+                  { id: 2, name: "Plateformes d'apprentissage", desc: "Coursera, Udemy, Cybrary" },
+                  { id: 3, name: "Communautés", desc: "OWASP, ISC², SANS Institute" },
+                  { id: 4, name: "Veille sécurité", desc: "Krebs on Security, The Hacker News, Dark Reading" }
+                ].map((resource) => (
+                  <div key={resource.id} className="border-b border-gray-700 pb-4 last:border-b-0">
                     <h4 className="text-lg font-semibold text-purple-400">{resource.name}</h4>
                     <p className="text-gray-300">{resource.desc}</p>
                   </div>
@@ -316,10 +353,10 @@ const App = () => {
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Liens rapides</h4>
               <ul className="space-y-2">
-                <li><a href="#accueil" className="text-gray-400 hover:text-purple-400 transition-colors">Accueil</a></li>
-                <li><a href="#menaces" className="text-gray-400 hover:text-purple-400 transition-colors">Menaces</a></li>
-                <li><a href="#conseils" className="text-gray-400 hover:text-purple-400 transition-colors">Conseils</a></li>
-                <li><a href="#ressources" className="text-gray-400 hover:text-purple-400 transition-colors">Ressources</a></li>
+                <li><button onClick={() => handleSmoothScroll('accueil')} className="text-gray-400 hover:text-purple-400 transition-colors">Accueil</button></li>
+                <li><button onClick={() => handleSmoothScroll('menaces')} className="text-gray-400 hover:text-purple-400 transition-colors">Menaces</button></li>
+                <li><button onClick={() => handleSmoothScroll('conseils')} className="text-gray-400 hover:text-purple-400 transition-colors">Conseils</button></li>
+                <li><button onClick={() => handleSmoothScroll('ressources')} className="text-gray-400 hover:text-purple-400 transition-colors">Ressources</button></li>
               </ul>
             </div>
             <div>
