@@ -6,7 +6,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false,
+    rollupOptions: {
+      input: {
+        main: './src/main.jsx'
+      }
+    }
   },
   server: {
     port: 3000,
